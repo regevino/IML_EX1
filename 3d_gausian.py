@@ -30,6 +30,8 @@ def plot_3d(x_y_z):
     ax.set_ylabel('y')
     ax.set_zlabel('z')
 
+    fig.suptitle('Q11: Random points')
+    fig.show()
 
 def plot_2d(x_y):
     '''
@@ -45,3 +47,5 @@ def plot_2d(x_y):
     ax.set_xlabel('x')
     ax.set_ylabel('y')
 
+if __name__ == '__main__':
+    plot_3d(x_y_z)
