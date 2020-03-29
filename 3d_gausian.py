@@ -14,12 +14,13 @@ def get_orthogonal_matrix(dim):
     return Q
 
 
-def plot_3d(x_y_z):
-    '''
+def plot_3d(x_y_z, title):
+    """
     plot points in 3D
     :param x_y_z: the points. numpy array with shape: 3 X num_samples (first dimension for x, y, z
     coordinate)
-    '''
+    :param title: The title that will appear above the plot
+    """
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     ax.scatter(x_y_z[0], x_y_z[1], x_y_z[2], s=1, marker='.', depthshade=False)
@@ -30,15 +31,16 @@ def plot_3d(x_y_z):
     ax.set_ylabel('y')
     ax.set_zlabel('z')
 
-    fig.suptitle('Q11: Random points')
+    fig.suptitle(title)
     fig.show()
 
+
 def plot_2d(x_y):
-    '''
+    """
     plot points in 2D
-    :param x_y_z: the points. numpy array with shape: 2 X num_samples (first dimension for x, y
+    :param x_y: the points. numpy array with shape: 2 X num_samples (first dimension for x, y
     coordinate)
-    '''
+    """
     fig = plt.figure()
     ax = fig.add_subplot(111)
     ax.scatter(x_y[0], x_y[1], s=1, marker='.')
@@ -47,5 +49,23 @@ def plot_2d(x_y):
     ax.set_xlabel('x')
     ax.set_ylabel('y')
 
+
 if __name__ == '__main__':
-    plot_3d(x_y_z)
+    # Question 11:
+    plot_3d(x_y_z, 'Q11: Random points')
+
+    # Question 12:
+    s = np.array([[0.1, 0, 0], [0, 0.5, 0], [0, 0, 2]])
+    data = np.matmul(s, x_y_z)
+    plot_3d(data, 'Q12: Data transformed by scaling matrix')
+
+    # Question 13:
+    rand_mat = get_orthogonal_matrix(3)
+    data = np.matmul(rand_mat, data)
+    plot_3d(data, 'Q13: Scaled data multiplied by random orthogonal matrix')
+
+    # Question 14:
+
+    # Question 15:
+
+    # Question 16:
