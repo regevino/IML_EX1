@@ -31,11 +31,11 @@ def plot_3d(x_y_z, title):
     ax.set_ylabel('y')
     ax.set_zlabel('z')
 
-    fig.suptitle(title)
-    fig.show()
+    plt.title(title)
+    plt.show()
 
 
-def plot_2d(x_y):
+def plot_2d(x_y, title):
     """
     plot points in 2D
     :param x_y: the points. numpy array with shape: 2 X num_samples (first dimension for x, y
@@ -48,6 +48,9 @@ def plot_2d(x_y):
     ax.set_ylim(-5, 5)
     ax.set_xlabel('x')
     ax.set_ylabel('y')
+
+    plt.title(title)
+    plt.show()
 
 
 if __name__ == '__main__':
@@ -65,6 +68,7 @@ if __name__ == '__main__':
     plot_3d(data, 'Q13: Scaled data multiplied by random orthogonal matrix')
 
     # Question 14:
+    plot_2d(x_y_z, 'Q14: Projection to x,y axes')
 
     # Question 15:
 
