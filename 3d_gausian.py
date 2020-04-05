@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 from scipy.linalg import qr
 
 mean = [0, 0, 0]
@@ -86,7 +85,7 @@ def q15():
 
 def q16():
     data = np.random.binomial(1, 0.25, (100000, 1000))
-    epsilon = [0.5, 0.25, 0.1, 0.01, 0.001]
+    epsilon = [0.25]
     sub_question_a(data)
     sub_questions_b_c(data, epsilon)
 
@@ -97,8 +96,14 @@ def sub_question_a(data):
     for i in range(5):
         first_five_estimated_means.append(np.cumsum(data[i]) / np.arange(1, 1001))
     for i in range(5):
-        plt.plot(np.arange(1, 1001), first_five_estimated_means[i], color=colors[i])
-    plt.title('Q16 (a): Estimated means')
+        plt.plot(np.arange(1, 1001),
+                 first_five_estimated_means[i],
+                 color=colors[i],
+                 label=f'Estimated mean of sequence no. {i}')
+    plt.legend(loc='best', shadow=True, fontsize='small')
+    plt.xlabel('m - Number of samples')
+    plt.ylabel('Estimated means')
+    plt.title('Q16 (a): Estimated means of sequences')
     plt.show()
 
 
@@ -114,12 +119,13 @@ def sub_questions_b_c(data, epsilon):
                  (np.repeat(2, 1000) * np.exp(np.cumsum(np.repeat(-2 * eps ** 2, 1000)))).clip(max=1),
                  color='blue',
                  label=f'Hoeffding bound')
-        percentage = [len(list(filter(lambda x: abs(x - 0.25) >= eps, transposed_means[j]))) / len(means) for j in range(1000)]
+        percentage = [len(list(filter(lambda x: abs(x - 0.25) >= eps,
+                                      transposed_means[j]))) / len(means) for j in range(1000)]
         plt.plot(np.arange(1, 1001), percentage, color='green', label='Percentage of samples satisfying given event')
         plt.title(f'Q16 (b, c): Bounds for ${{\\varepsilon}}$ = {eps}')
         plt.xlabel('m - Number of samples')
         plt.ylabel('Bounds')
-        legend = plt.legend(loc='best', shadow=True, fontsize='small')
+        plt.legend(loc='best', shadow=True, fontsize='small')
         plt.show()
 
 
